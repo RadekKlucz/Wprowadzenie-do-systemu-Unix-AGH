@@ -1,0 +1,88 @@
+ZADANIA
+1. 
+tak
+ls -R $HOME
+
+2.
+https://www.thegeekdiary.com/what-is-suid-sgid-and-sticky-bit/#:~:text=Set%2Duser%20Identification%20(SUID)&text=%E2%80%93%20When%20a%20command%20or%20script,user%20who%20is%20running%20it.&text=%E2%80%93%20The%20setuid%20permission%20displayed%20as,in%20the%20owner's%20execute%20field.
+
+3.
+mkdir -p ~/c2/text && man ls > ~/c2/text/man_ls && ls -l ~/c2/text/man_ls
+-rw-rw-r--.
+ ^
+ owner: read, write
+    ^
+    owner's primary group: read, write
+       ^
+       others: read
+
+rwx
+010 => dec => 2
+
+-rw-rw-r--.
+ 110 110 100 => 6 6 4
+
+4.
+chmod 600 ~/c2/text/man_ls
+chmod -R +t ~/c2/text
+
+5.
+cp ~/c2/text/man_ls ~/c2/text/man_ls_cp
+takie same prawa dostepu, bez sticky bitu
+
+chmod 440 ~/c2/text/man_ls_cp
+
+6.
+umask
+umask 0001
+
+7.
+find ~ -maxdepth 2 -ls | sort -rnk7 | head -n 1 | awk '{ FS=" " } { print $11 }'
+
+8.
+find ~ -ls | sort -rnk2 | head -n 1 | awk '{ FS=" " } { print $11 }'
+
+9.
+find /usr/include -type f -name "c*" -ls
+
+10.
+find ~ -maxdepth 1 -mtime +2 -type f -ls
+find ~ -mtime +2 -type f -ls
+
+11.
+find /usr/include -maxdepth 1 -type f -name "m*.h" -size -12k
+
+12.
+tar -cf c2.tar c2
+gzip c2.tar
+
+tar -czf c2.tar.gz c2
+
+rm -rf c2
+tar -xf c2.tar.gz
+
+13.
+quota
+du -sb ~
+
+14.
+df - report file system disk space usage
+free - Display amount of free and used memory in the system
+
+
+
+ZADANIE SPRAWDZAJĄCE
+1.
+ls ~ -l --sort=t | tail -n 1 | awk '{ FS=" " } { print $8 }'
+
+2.
+find /usr/include -maxdepth 1 -type d | wc -l
+
+3.
+find /usr/include -maxdepth 1 -type f -name "m???.h" | wc -l
+
+4.
+find /usr/include -maxdepth 1 -type f -size +12000c
+
+5.
+find /usr/bin -maxdepth 1 -type f -size -1M | wc -l

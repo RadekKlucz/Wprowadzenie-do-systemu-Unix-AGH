@@ -1,0 +1,96 @@
+ZADANIA
+1.
+ps - report a snapshot of the current processes.
+
+- ps axo %p%P
+- ps axo %mem,bsdtime
+- ps axo %y
+- ps axo %a
+
+1   UNIX options, which may be grouped and must be preceded by a dash.
+2   BSD options, which may be grouped and must not be used with a dash.
+
+2.
+ps o user,pid,pri,nice,tty
+
+3.
+ps o %mem,pri,nice,command | grep prog | head -n 1
+pri: 19
+nice: 0
+
+renice 19 30257
+pri: 0
+nice: 19
+
+zwiazek:
+pri + nice = 19
+nice [-20, 19]
+
+im wyzsze prio tym wiecej cpu%
+im wyzszy nice tym mniej cpu%
+
+4.
+nie dziala
+
+5.
+nie istnieje
+
+6.
+nohup ./prog &
+./nohup.out
+
+7.
+SIGSTOP: kill -n 19 11157
+stan: T
+zuzycie cpu spada
+
+
+SIGCONT: kill -n 18 11157
+stan: R
+zuzycie cpu wzrasta
+
+8.
+SIQUIT: kill -n 3 13569
+stan: S+
+output: Otrzymalem sygnal 3
+
+SIGTSTP: kill -n 20 13569
+stan: S+
+output: Otrzymalem sygnal 20
+
+SIGTERM: kill -n 15 13569
+stan: S+
+output: Otrzymalem sygnal 15
+
+SIGKILL: kill -n 9 13569
+stan: dead
+
+9.
+ps axo pid,stat,vsz | grep " T " | sort -nrk 3 | head -n 1 | awk '{ FS=" " } { print $1 }'
+
+10.
+ps axo user,nice | awk '{ FS=" " } $2==0 { print $1 }' | sort | uniq -c | sort -n | tail -n 1
+
+11.
+ps axo vsz,pid | sort -n | tail -n 3 | awk '{ FS=" " } { print $2 }'
+
+
+
+ZADANIE SPRAWDZAJĄCE
+1. 
+ps L
+
+2.
+ps -U root o pid,size --sort size
+
+3.
+ps --ppid 1 | wc -l
+
+4.
+ps axo user | sort | uniq -c | sort -n | tail -n 1
+
+5.
+ps axo pid,%cpu --sort %cpu | tail -n 1 | awk '{ FS=" " } { print $1 }'
+
+6.
+echo $(( $(ps | wc -l) - 4))

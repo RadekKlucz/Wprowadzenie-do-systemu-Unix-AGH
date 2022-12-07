@@ -1,0 +1,41 @@
+cat - wypisywanie zawartoœci plików; z opcj¹ --number dodatkowo numeruje ka¿d¹ liniê;
+awk - "programowalny" cut, z opcj¹ -F ustala nowy separator kolumn, czêœæ programowalna w '{}', $1 - pierwsza kolumna;
+sort - sortuje linie wg danego kryterium (domyœlnie alfabetycznie);	-b - ignoruje puste znaki na pocz¹tku lini przy sortowaniu,
+									-f - ignoruje wielkoœæ liter;
+									-n - sortuje po liczbach rozpoczynaj¹cych wiersz;
+									-r - odwraca kolejnoœæ wyników;
+
+uniq - usuwa powtarzaj¹ce siê po sobie takie same linie;		-c - dodatkowo wypisuje przed liniami iloœæ wyst¹pieñ;
+									-d - wypisuje tylko powtarzaj¹ce siê linie;
+									-u - wypisuje tylko niepowtarzaj¹ce siê linie;
+
+wc - wypisuje iloœæ wierszy, s³ów i znaków w pliku tekstowym;		-l - tylko linie;
+									-w - tylko s³owa;
+									-c - tylko znaki;
+
+find - 	wyszukuje pliki w podanej œcie¿ce lub bie¿¹cym katalogu,	-maxdepth - maksymalna g³êbokoœæ poszukiwañ, 1 - nie szukaæ w podkatalogach,
+	opcjonalnie wykonuje na nich operacje;				0 - przejrzenie tylko podanych argumentów bez wchodzenia w nie;
+									-ctime - wypisuje pliki utworzone n dni temu; +n - wiêksze, -n - mniejsze, n - dok³adnie n;
+									-size - wyszukuje pliki o podanym rozmiarze -size n[ckMG] bajty/kilobajty/megabajty/gigabajty;
+									-type - wyszukuje pliki tylko danego typu - [dfl] katalog/zwyk³y plik/³¹cze (dowi¹zanie symb.);
+									-perm - prawa w uk³adzie ósemkowym;
+									-exec - wykonuje na pliku podane polecenie, {} jest zastêpowane nazw¹ pliku, œrednik jest 
+									wymagany i nale¿y zabezpieczyæ go backslashem przed interpretacj¹ przez basha;
+									-name - po nazwie;
+
+ps - wyœwietla procesy;							-e/-ax - wyœwietla wszystkie procesy, nie tylko bie¿¹cego u¿ytkownika;
+									-l - w³¹cza d³ugi format, wiêcej informacji na raz;
+									-o - wyœwietla tylko wybrane kolumny;
+
+tail/head - wypisuje linie z pocz¹tku i koñca;				[-liczba][plik]; tail -n+2 - wypisuje plik pocz¹wszy od linii liczba;
+
+ls - wypisuje zawartoœæ aktualnego katalogu lub podanego w argumencie;	-a - wypisuje równie¿ pliki zaczynaj¹ce siê od kropki;
+									-d - operuje na podanym katalogu zamiast jego zawartoœci;
+									-i - wypisuje i-wêz³y plików;
+									-l - d³u¿szy listing z informacjami;
+grep - filtruje wejœcie pozostawiaj¹c tylko linie pasuj¹ce do wzorca;	[-cirvx] - wyœwietla iloœæ linii zamiast treœci/ignoruje wielkoœæ liter/zamiast pliku
+									wszystkie pliki w katalogu/odwraca dzia³anie/dopasowuje tylko ca³e linie;
+
+cut - wycina kawa³ki plików;						-c - wycina wybrane litery;
+									-f - wycina wybrane kolumny oddzielone domyœlnie tabulatorem;
+									-d - zmienia separator kolumn dla -f;
