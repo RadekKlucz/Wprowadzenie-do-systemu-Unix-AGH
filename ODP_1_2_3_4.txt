@@ -24,8 +24,21 @@ $ nautilus &   <- open WLS Linux windows
 
 Connection with Bastion (not all commands) and shell (all commands): 
 $ ssh bastion.ii.agh.edu.pl -l mylogin
+
+Haslo:
+
+5Tvu4eck7WJqnfa!
+
 or:  
 $ ssh mylog@bastion.ii.agh.edu.pl
+
+Do shela: 
+
+ssh shell.lab.ii.agh.edu.pl -l naszlogin
+lub krócej:
+ssh naszlogin@shell.lab.ii.agh.edu.pl
+
+
 -----------------------------------------------------------------------
 
 OPIS NIEKTORYCH KOMEND 
@@ -113,21 +126,82 @@ $ cat /etc/passwd | more <- wyswietlenie pliku /etc/passwd w programie more
 $ more /etc/passwd <- ludzie z godnioscia czlowieka to uzywaja a nie jakies cat!
 
 2.
-$ less /etc/group <- wyswietlenie pliku /etc/group a dokladnie jego lini w programie less
+$ less /etc/group <- wyswietlenie pliku /etc/group a dokladnie jego lini w programie less, podobne do more
 less /etc/group | grep 12 <- z szukaniem 12 
 
 3.
 $ head -n 17 /etc/passwd
 $ tail -21 /etc/passwd
+Wypisanie jednej lini (tutaj 27)
 $ head -n 27 /etc/passwd | tail -n 1
 
 4.
 wc <- print newline, word, and byte counts for each file
+ -c, --bytes
+              print the byte counts
+
+       -m, --chars
+              print the character counts
+
+       -l, --lines
+              print the newline counts
+
+       --files0-from=F
+              read  input  from  the  files specified by NUL-terminated names in file F; If F is - then read names
+              from standard input
+
+       -L, --max-line-length
+              print the maximum display width
+
+       -w, --words
+              print the word counts
+
 
 5.
-uniq <- report or omit repeated lines
+uniq <- report or omit repeated lines -c, --count
+              prefix lines by the number of occurrences 
 
-6.
+Mandatory arguments to long options are mandatory for short options too.
+
+       -c, --count
+              prefix lines by the number of occurrences
+
+
+
+       -d, --repeated
+              only print duplicate lines, one for each group
+
+       -D     print all duplicate lines
+
+       --all-repeated[=METHOD]
+              like -D, but allow separating groups with an empty line; METHOD={none(default),prepend,separate}
+
+       -f, --skip-fields=N
+              avoid comparing the first N fields
+
+       --group[=METHOD]
+              show all items, separating groups with an empty line; METHOD={separate(default),prepend,append,both}
+
+       -i, --ignore-case
+              ignore differences in case when comparing
+
+       -s, --skip-chars=N
+              avoid comparing the first N characters
+
+       -u, --unique
+              only print unique lines
+
+       -z, --zero-terminated
+              line delimiter is NUL, not newline
+
+       -w, --check-chars=N
+              compare no more than N characters in lines
+
+
+6.  Do czego służy komenda cal? Jakie są jej opcje i argumenty? Sprawdź,
+w jaki dzień tygodnia wypada Boże Narodzenie w tym roku. Ile dni miał
+miesiąc wrzesień w 1752 roku?
+
 cal, ncal <- displays a calendar and the date of Easter
 
 $ cal -m 12 
@@ -138,7 +212,7 @@ $ cal 9 1752 | awk 'NF {DAYS = $NF}; END {print DAYS}'
 	NF <- The number of fields in the current input record.
 
 7.
-$ bc
+$ bc <- CALCULATOR 
 
 8.
 pwd <- print name of current/working directory
@@ -176,11 +250,13 @@ $ echo $PATH
 $ echo $PS1
 [\u@\h \W]\$
 
-12.
+12. Gdzie w systemie zapisywana jest informacja o wszystkich (udanych
+i nieudanych) podłączeniach do systemu. Zapoznaj się z komendą last.
 last, lastb <- show a listing of last logged in users
 /var/log/wtmp
 
-13.
+13. Do czego służy komenda who? Jakie są opcje i argumenty jej wywołania? Jakich informacji dostarcza komenda w?
+
 who <- show who is logged on
 
        -b, --boot
@@ -191,16 +267,22 @@ who <- show who is logged on
        -u, --users
               list users logged in
 
+$ w <- Show who is logged on and what they are doing.
+
 14.
+
+$ id <- print real and effective user and group IDs
+
 co robia uzytkownicy i ile zasobow uzywaja
+
 -----------------------------------------------------------------------
 
 PODAJ POSTAĆ LINII KOMEND, LAB 1
 
 -----------------------------------------------------------------------
-1.
+1. Ilu użytkowników lokalnych jest zdefiniowanych w systemie?
+
 $ cat /etc/passwd | wc -l
-332
 
 2.
 $ cat /etc/passwd | awk '{ FS=":" } $3==14 { print $5 }'
@@ -209,44 +291,53 @@ FTP User
 
 $ more /etc/passwd | awk '{FS=":"} $4==1000 {print $5}' | wc -l 
 
-3.
-# echo $(id -g $whoami) | xargs -I % sh -c "cat /etc/passwd | awk '{ FS=\":\" } \$4==% { print }'" | wc -l <- to nie dziala !!!!
+3.  Ilu jest użytkowników w systemie, których grupa podstawowa jest Twoją grupą? 
+
+# echo $(id -g $whoami) | xargs -I % sh -c "cat /etc/passwd | awk '{ FS=\":\" } \$4==% { print }'" | wc -l <- dziala ale dlugie
+
+To samo: 
 
 $ more /etc/passwd | grep "$(id -gn):" | wc -l
-1
 
-4.
+4. Ilu użytkowników zdefiniowanych w systemie używa jako podstawowego interpretera poleceń interpretera Bash?
+
 $ more /etc/passwd | awk '{ FS=":" } $7=="/bin/bash" { print "" }' | wc -l
 308
 
-$ more /etc/passwd | grep /bin/bash | wc -l
+$ more /etc/passwd | grep /bin/bash | wc -l <- pokazuje roota
 309
 
 druga jest poprawna, nw dlaczego pierwsza pomija roota (1 linijka w /etc/passwd)
 
-5.
-$ more /etc/passwd | awk '{ FS=":" } $3>12000 { print "" }' | wc -l
-1
+5. Ilu użytkowników w systemie posiada numer identyfikacyjny UID większy od 12000?
 
-6.
+$ more /etc/passwd | awk '{ FS=":" } $3>12000 { print "" }' | wc -l
+
+6. Jak wylistować zawartość kilku katalogów na raz (w jednej komendzie)?
+
 $ ls ~ / <- wylistowanie kilku katalogow na raz 
 
-7.
+7. Jak wypisać za pomocą jednej komendy echo cyfry od 0 do 5, każdą w osobnej linii?
+
 $ for i in {0..5}; do echo $i; done
 -----------------------------------------------------------------------
 
 ZADANIA SPRAWDZAJĄCE LAB 1
 
 -----------------------------------------------------------------------
-1.
-$ ls / | wc -l
-19
 
-2.
+1.  Ile plików i katalogów znajduje się w katalogu głównym (/)?
+
+$ ls / | wc -l
+
+2. Ilu użytkowników jest aktualnie zalogowanych?
+
 $ who -q
 
-3.
+3. Ile słów liczy plik /usr/include/utime.h?
+
 $ more /usr/include/utime.h | wc -w
+
 -----------------------------------------------------------------------
 
 LAB 2
@@ -304,35 +395,45 @@ cut - remove sections from each line of files
               select  only  these fields;  also print any line that contains no delimiter character, unless the -s option is speci‐
               fied
 
-2.
+2. Jak w systemie opisany został (zawartość piątej kolumny pliku
+/etc/passwd) użytkownik, którego numer identyfikacyjny (UID)
+wynosi 14?
+
 $ more /etc/passwd | awk '{ FS=":" } $3==14 { print $5 }'
 FTP User
 
-3.
-$ more /etc/passwd | grep "$(id -gn):" | wc -l
+3. Bylo
+$ more /etc/passwd | grep "$(id -g):" | wc -l
 1
 
-4.
+4. Bylo
 $ more /etc/passwd | grep /bin/bash | wc -l
 309
 
-5.
+5. Ilu użytkowników w systemie posiada numer identyfikacyjny (UID)
+większy od 20?
+
 $ more /etc/passwd | awk '{ FS=":" } $3>20 { print "" }' | wc -l
 320
 
-6.
+6. Jaki jest największy numer grupy lokalnej w systemie?
+
 $ more /etc/passwd | awk 'BEGIN { max=-1 } { FS=":" } $4>max { max=$4 } END { print max }'
+
 65534
 
-7. ????
+7.  Ile jest w systemie grup, które nie są grupą podstawową dla co najmniej
+jednego użytkownika?
+
 $ diff <(cat /etc/passwd | awk '{ FS=":" } { print $4 }') <(cat /etc/group | awk '{ FS=":" } { print $3 }') | grep '^[<>].' | wc -l
 30
 
-8.
-$ more /etc/group | awk '{ FS=":" } $4=="" { print "" }' | wc -l
-348
+8. Ile grup w systemie nie jest grupami dodatkowymi dla żadnego uzytkownika?
 
-9.
+$ more /etc/group | awk '{ FS=":" } $4=="" { print "" }' | wc -l
+
+9. Wypisz użytkowników, których nazwa składa się z dokładnie 8 znaków.
+
 $ more /etc/passwd | awk '{ FS=":" } length($1)==8 { print $1 }'
 
 10.
@@ -423,7 +524,9 @@ $ ls -l man_ls
 
 
 
-5.
+5. Skopiuj z katalogu /bin do swojego katalogu ~/c2/bin plik ls,
+zmieniając jego nazwę na moj_ls. W jaki sposób można skopiować cały
+katalog /usr/include/scsi?
 $ cp /bin/ls ~/c2/bin/moj_ls
 
 $ cp -r /usr/include/scsi/ ~/c2/bin
@@ -432,18 +535,25 @@ $ cp -r /usr/include/scsi/ ~/c2/bin
 ZADANIA SPRAWDZAJĄCE, LAB 2
 
 -----------------------------------------------------------------------
-2.
+2.  Podaj liczbę lokalnych użytkowników, którzy nie mogą się zalogować
+(/sbin/nologin jako shell)?
+
 cat /etc/passwd | grep /sbin/nologin | wc -l
 
 moje daje inny wynik, czemu?
+
 $ more /etc/passwd | awk '{FS=":"} $7="/sbin/nologin" {print $7}' | wc -l
 
+3. Ile jest osób w /etc/passwd o nazwisku Nowak?
 
-3.
 $ cat /etc/group | awk '{ FS=":" } $5=="Nowak" { print "" }' | wc -l
 0
 
-4.$10[2]==1
+4. Ilu użytkowników było jednorazowo zalogowanych co najmniej godzinę
+(wykorzystaj wyniki polecenia last)?
+
+$10[2]==1
+
 $ last | awk '{ FS=" " } substr($10, 2, 2)+0>1 { print "" }' | wc -l
 35
 
@@ -455,11 +565,14 @@ ZADANIA, LAB 3
 
 -----------------------------------------------------------------------
 
-1. 
+1. Czy znajdując się w katalogu $HOME, jednym wywołaniem komendy
+ls można obejrzeć zawartość wszystkich katalogów do samego końca
+drzewa plików (czyli w sposób rekursywny)? Sprawdź to w manualu
+
 tak
 ls -R $HOME
 
-2.
+2.  Ustal, w jaki sposób oznaczane są ustawione uprawnienia dodatkowe (SUID, SGID i SVTX).
 https://www.thegeekdiary.com/what-is-suid-sgid-and-sticky-bit/#:~:text=Set%2Duser%20Identification%20(SUID)&text=%E2%80%93%20When%20a%20command%20or%20script,user%20who%20is%20running%20it.&text=%E2%80%93%20The%20setuid%20permission%20displayed%20as,in%20the%20owner's%20execute%20field.
 
 3.
@@ -492,25 +605,35 @@ chmod 440 ~/c2/text/man_ls_cp
 umask
 umask 0001
 
-7.
-find ~ -maxdepth 2 -ls | sort -rnk7 | head -n 1 | awk '{ FS=" " } { print $11 }'
+7.  Podaj nazwę pliku w katalogu domowym (rekursywnie) o największym
+rozmiarze. Jaki jest największy plik tylko w katalogu domowym i jego
+bezpośrednich podkatalogach?
+
+$ find ~ -maxdepth 2 -ls | sort -rnk 7 | head -n 1 | awk '{ FS=" " } { print $11 }'
 
 Moje rozwiazanie: 
 
 du -a $(pwd) | sort -nr | head -n 5
 
-8.
+8.  Podaj nazwę pliku w katalogu domowym (rekursywnie) o największej ilości bloków.
+
 find ~ -ls | sort -rnk 2 | head -n 1 | awk '{ FS=" " } { print $11 }'
 
-9.
+9.  Korzystając z komendy find, wyszukaj i wylistuj w postaci długiej
+wszystkie pliki regularne, które znajdują się w katalogu /usr/include
+i jego podkatalogach, a ich nazwa zaczyna się na literę c
+
 $ find /usr/include -type f -name "c*" -ls
 
-10.
+10. y w Twoim katalogu domowym (z podkatalogami) są pliki modyfikowane wcześniej niż 2 dni temu? 
+Jak to sprawdzić? Wylistuj je w postaci długiej. Zrób to raz z uwzględnieniem podkatalogów, a raz – bez.
+
 $ find ~ -maxdepth 1 -mtime +2 -type f -ls <- uwzglednieniem podkatalogow
 
 $ find ~ -mtime +2 -type f -ls <- bez uwzgledniania podkatalogow
 
-11.
+11. Znajdź liczbę plików regularnych w /usr/include (bez podkatalogów) które zaczynają się na m i kończą na .h oraz których rozmiar nie
+przekracza 12KB.
 $ find /usr/include -maxdepth 1 -type f -name "m*.h" -size -12k
 
 12.
@@ -556,22 +679,106 @@ du -sb ~
 df - report file system disk space usage
 free - Display amount of free and used memory in the system
 
+15. 
+Co? DO KOLOSA NIE POPTRZEBNE, ZROBIC POZNIEJ!
 
+16. Korzystając z komend du oraz sort, zaproponuj takie ich powiązanie,
+które pozwoli wylistować w kolejności malejącej listę katalogów
+z katalogu /usr uporządkowaną według wykorzystania przestrzeni
+dyskowej przez te katalogi i ich podkatalogi. 
+
+$ du -hd 2 /usr/ | sort -hr
+
+-h <- format odczytu dla czlowieka w Gb, Mb itd. W opcji sort ta opcja bedzie nam po tym sortowala 
+-d <- okresla maksymalna glebokosc dla katalogu 
+
+17.
+Na razie do kolosa nie potrzebne 
+-----------------------------------------------------------------------
 
 ZADANIE SPRAWDZAJĄCE
-1.
-ls ~ -l --sort=t | tail -n 1 | awk '{ FS=" " } { print $8 }'
 
-2.
+-----------------------------------------------------------------------
+
+1. Znajdź plik w swoim katalogu domowym, który był najdawniej
+modyfikowany.
+
+ls ~ -l --sort=t | tail -n 1 | awk '{ FS=" " } { print $9 }'
+
+ --sort=WORD
+              sort by WORD instead of name: none (-U), size (-S), time (-t), version (-v), extension (-X)
+
+       --time=WORD
+              with -l, show time as WORD instead of default modification time: atime or access or use (-u);  ctime
+              or status (-c); also use specified time as sort key if --sort=time (newest first)
+
+       --time-style=TIME_STYLE
+              time/date format with -l; see TIME_STYLE below
+
+       -t     sort by modification time, newest first
+
+       -T, --tabsize=COLS
+              assume tab stops at each COLS instead of 8
+
+       -u     with  -lt:  sort  by,  and show, access time; with -l: show access time and sort by name; otherwise:
+              sort by access time, newest first
+
+       -U     do not sort; list entries in directory order
+
+       -v     natural sort of (version) numbers within text
+
+       -w, --width=COLS
+              set output width to COLS.  0 means no limit
+
+       -x     list entries by lines instead of by columns
+
+       -X     sort alphabetically by entry extension
+
+       -Z, --context
+              print any security context of each file
+
+       -1     list one file per line.  Avoid '\n' with -q or -b
+
+2. Ile katalogów znajduje się w /usr/include?
+
 find /usr/include -maxdepth 1 -type d | wc -l
 
-3.
+3. Ile jest plików w /usr/include (bez podkatalogów), których nazwa
+   składa się z 6 liter, zaczyna się na m i kończy na .h?
+
 find /usr/include -maxdepth 1 -type f -name "m???.h" | wc -l
 
-4.
-find /usr/include -maxdepth 1 -type f -size +12000c
+4.  Ile jest plików regularnych w katalogu i podkatalogach /usr/include,
+    które mają rozmiar większy niż 12000B
+find /usr/include -maxdepth 1 -type f -size +12000c | wc -l
 
-5.
+-size n[cwbkMG]
+              File uses n units of space, rounding up.  The following suffixes can be used:
+
+              `b'    for 512-byte blocks (this is the default if no suffix is used)
+
+              `c'    for bytes
+
+              `w'    for two-byte words
+
+              `k'    for kibibytes (KiB, units of 1024 bytes)
+
+              `M'    for mebibytes (MiB, units of 1024 * 1024 = 1048576 bytes)
+
+              `G'    for gibibytes (GiB, units of 1024 * 1024 * 1024 = 1073741824 bytes)
+
+              The  size  is  simply  the st_size member of the struct stat populated by the lstat (or stat) system
+              call, rounded up as shown above.  In other words, it's consistent with the result you get for ls -l.
+              Bear  in  mind  that the `%k' and `%b' format specifiers of -printf handle sparse files differently.
+              The `b' suffix always denotes 512-byte blocks and never 1024-byte blocks, which is different to  the
+              behaviour of -ls.
+
+              The  +  and  - prefixes signify greater than and less than, as usual; i.e., an exact size of n units
+              does not match.  Bear in mind that the size is rounded up to the next unit.  Therefore -size -1M  is
+              not  equivalent  to  -size -1048576c.  The former only matches empty files, the latter matches files
+              from 0 to 1,048,575 bytes.
+
+5. Ile jest plików w /usr/bin o wielkości do 1MB?
 find /usr/bin -maxdepth 1 -type f -size -1M | wc -l
 
 -----------------------------------------------------------------------
@@ -760,7 +967,7 @@ ZADANIE SPRAWDZAJĄCE
 
 -----------------------------------------------------------------------
 
-1. 
+1. Jak wypisać wszystkie dostępne nazwy kolumn dla komendy ps?
 ps L <- wypisuje wszystkie dostepnie nazwy kolumn dla komendy ls
 
 2.
