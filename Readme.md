@@ -8,7 +8,7 @@ The repository contains materials for the Unix course implemented at the AGH Uni
 
 [Lab 5-6](./lab/lab5-8/)
 
-[Laborki](./lab/laborki/)
+[Laborki (old instructions)](./lab/laborki/)
 
 [Lectrures](./lectures/)
 
