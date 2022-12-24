@@ -1,4 +1,4 @@
-# UNIX
+# UNIX (2022/2023)
 
 The repository contains materials for the Unix course implemented at the AGH University of Science and Technology.
 
