@@ -6,7 +6,7 @@ The repository contains materials for the Unix course implemented at the AGH Uni
 
 [Lab 1-4](./lab/lab1-4/)
 
-[Lab 5-6](./lab/lab5-8/)
+[Lab 5-6](./lab/lab5-6/readme.md)
 
 [Laborki (old instructions)](./lab/laborki/)
 
