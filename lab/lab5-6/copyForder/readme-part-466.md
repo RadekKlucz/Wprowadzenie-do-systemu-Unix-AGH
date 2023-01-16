@@ -1,0 +1,1 @@
+wykonać p

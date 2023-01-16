@@ -1,0 +1,2 @@
+Standardowe wyjscie diagnostyczne
+Standardowe wyjscie

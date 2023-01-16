@@ -1,0 +1,1 @@
+kowanie mo

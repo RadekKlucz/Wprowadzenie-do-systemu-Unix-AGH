@@ -1,0 +1,1 @@
+lecenie je

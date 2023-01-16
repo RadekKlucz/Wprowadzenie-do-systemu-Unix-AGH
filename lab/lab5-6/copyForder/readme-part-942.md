@@ -1,0 +1,1 @@
+rtości zm

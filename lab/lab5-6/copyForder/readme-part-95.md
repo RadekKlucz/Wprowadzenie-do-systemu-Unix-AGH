@@ -1,0 +1,2 @@
+
+Typowym p

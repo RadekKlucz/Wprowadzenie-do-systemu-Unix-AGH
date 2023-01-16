@@ -1,0 +1,1 @@
+waniu się

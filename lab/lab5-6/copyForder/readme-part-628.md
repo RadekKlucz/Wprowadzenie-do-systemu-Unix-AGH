@@ -1,0 +1,1 @@
+końcu ist

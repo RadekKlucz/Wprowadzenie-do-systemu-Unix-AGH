@@ -1,0 +1,1 @@
+dzenie i d

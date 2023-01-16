@@ -1,0 +1,2 @@
+rukcji
+do

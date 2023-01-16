@@ -1,0 +1,1 @@
+warunek_2 

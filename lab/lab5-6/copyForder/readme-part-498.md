@@ -1,0 +1,1 @@
+ zrywa ses

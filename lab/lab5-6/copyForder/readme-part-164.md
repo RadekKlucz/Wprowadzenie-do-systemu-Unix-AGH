@@ -1,0 +1,1 @@
+ybór inte

@@ -1,0 +1,1 @@
+wnież zmi

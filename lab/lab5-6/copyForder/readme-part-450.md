@@ -1,0 +1,1 @@
+etnego zna

@@ -1,0 +1,2 @@
+o
+lista_i

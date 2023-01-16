@@ -1,0 +1,1 @@
+sywanie do

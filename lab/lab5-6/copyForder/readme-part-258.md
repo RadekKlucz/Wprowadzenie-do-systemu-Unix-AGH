@@ -1,0 +1,1 @@
+ATKOWA ; W

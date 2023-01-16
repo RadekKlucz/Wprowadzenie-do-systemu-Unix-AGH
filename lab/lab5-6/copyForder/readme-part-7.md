@@ -1,0 +1,1 @@
+ rzeczy z 

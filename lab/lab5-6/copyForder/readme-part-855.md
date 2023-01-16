@@ -1,0 +1,1 @@
+ trakcie o

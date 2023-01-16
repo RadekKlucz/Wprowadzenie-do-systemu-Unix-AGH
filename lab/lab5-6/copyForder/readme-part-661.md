@@ -1,0 +1,1 @@
+czasie w f

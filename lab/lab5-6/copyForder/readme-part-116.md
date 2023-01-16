@@ -1,0 +1,1 @@
+sza skład

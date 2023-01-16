@@ -1,0 +1,1 @@
+ ZMIENNA_I

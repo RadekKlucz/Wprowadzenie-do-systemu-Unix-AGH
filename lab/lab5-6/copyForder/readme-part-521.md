@@ -1,0 +1,1 @@
+podawany j

@@ -1,0 +1,1 @@
+tkownika o

@@ -1,0 +1,1 @@
+tępnych d

@@ -1,0 +1,1 @@
+ydanych ko

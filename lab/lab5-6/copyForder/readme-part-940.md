@@ -1,0 +1,1 @@
+poznać ja

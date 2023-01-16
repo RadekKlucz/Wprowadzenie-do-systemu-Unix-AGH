@@ -1,0 +1,1 @@
+zynności 

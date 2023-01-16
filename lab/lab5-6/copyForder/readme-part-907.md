@@ -1,0 +1,1 @@
+munikaty d

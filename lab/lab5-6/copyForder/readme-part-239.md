@@ -1,0 +1,1 @@
+strukcje_j

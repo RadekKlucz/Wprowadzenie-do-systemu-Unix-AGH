@@ -1,0 +1,1 @@
+ykonanie s
