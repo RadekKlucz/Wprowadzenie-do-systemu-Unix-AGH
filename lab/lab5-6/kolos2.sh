@@ -36,4 +36,3 @@ for file in $directory/*; do
 done
 
 exit 0
-
