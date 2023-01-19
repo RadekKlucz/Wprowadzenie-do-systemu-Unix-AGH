@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+	D=`dirname $0`
+else
+	D=$1
+fi
+
+if [ -d $D ]; then
+	ls -l $D | grep "^-.*" | awk '{SUM+=$5} END {print SUM}'
+else
+	echo "$D is not a directory"
+fi

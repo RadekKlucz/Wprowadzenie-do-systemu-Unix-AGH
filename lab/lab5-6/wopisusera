@@ -1,0 +1,7 @@
+#!/bin/bash
+
+U=`w | tail -n+3 |  cut -d" " -f1 | sort | uniq`
+
+for j in $U; do
+	cat /home/students/ddworak/passwd | grep $j: | cut -d: -f5
+done

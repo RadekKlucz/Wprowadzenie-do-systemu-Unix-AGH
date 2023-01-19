@@ -1,5 +1,9 @@
 # Rozwiązania do zadan ze skryptów 5 i 6
 
+# Kolos 
+
+[Treść](./kolos.md)
+
 ## Toretycznie rzeczy z skryptu 5 
 
 ### Tworzenie aliasów 
